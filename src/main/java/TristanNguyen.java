@@ -21,7 +21,6 @@ public class TristanNguyen {
                 }
             } else if (item.startsWith("mark")) {
                 int number = Integer.parseInt(item.substring(5));
-                // System.out.println(number);
                 listTask[number].mark();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(listTask[number]);
@@ -33,8 +32,25 @@ public class TristanNguyen {
             }
             else {
                 size++;
-                listTask[size] = new Task(item);
-                System.out.println("added: " + item);
+                if (item.startsWith("todo")) {
+                    String task = item.substring(4);
+                    listTask[size] = new Todo(task);
+                } else if (item.startsWith("deadline")){
+                    int indexBy = item.indexOf("/by");
+                    String task = item.substring(8, indexBy);
+                    String by = item.substring(indexBy + 3);
+                    listTask[size] = new Deadline(task, by);
+                } else if (item.startsWith("event")) {
+                    int indexFrom = item.indexOf("/from");
+                    int indexTo = item.indexOf("/to");
+                    String task = item.substring(5, indexFrom);
+                    String from = item.substring(indexFrom + 5, indexTo);
+                    String to = item.substring(indexTo + 3);
+                    listTask[size] = new Event(task, from, to);
+                }
+                System.out.println("Got it. I've added this task:");
+                System.out.println(listTask[size]);
+                System.out.println("Now you have " + size + " tasks in the list.");
             }
             System.out.println("____________________________________________________________");
         }
