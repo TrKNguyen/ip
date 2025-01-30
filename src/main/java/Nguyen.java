@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
+
+enum TaskType {
+    TODO, DEADLINE, EVENT;
+}
 public class Nguyen {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -48,13 +52,23 @@ public class Nguyen {
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(listTask.get(number - 1));
                 } else {
+                    TaskType type;
                     if (item.startsWith("todo")) {
+                        type = TaskType.TODO;
+                    } else if (item.startsWith("deadline")) {
+                        type = TaskType.DEADLINE;
+                    } else if (item.startsWith("event")) {
+                        type = TaskType.EVENT;
+                    } else {
+                        throw new NguyenException("Invalid operation");
+                    }
+                    if (type == TaskType.TODO) {
                         if (item.length() == 4) {
                             throw new NguyenException("Empty task is valid task");
                         }
                         String task = item.substring(4);
                         listTask.add(new Todo(task));
-                    } else if (item.startsWith("deadline")) {
+                    } else if (type == TaskType.DEADLINE) {
                         int indexBy = item.indexOf("/by");
                         if (item.length() == 8) {
                             throw new NguyenException("Empty task is valid task");
@@ -65,7 +79,7 @@ public class Nguyen {
                         String task = item.substring(8, indexBy);
                         String by = item.substring(indexBy + 3);
                         listTask.add(new Deadline(task, by));
-                    } else if (item.startsWith("event")) {
+                    } else if (type == TaskType.EVENT) {
                         int indexFrom = item.indexOf("/from");
                         int indexTo = item.indexOf("/to");
                         if (item.length() == 5) {
