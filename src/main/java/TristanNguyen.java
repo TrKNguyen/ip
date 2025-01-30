@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class TristanNguyen {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        String[] listItem = new String[101];
+        int size = 0;
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm TristanNguyen");
         System.out.println("What can I do for you?");
@@ -11,9 +13,17 @@ public class TristanNguyen {
             String item = scanner.nextLine();
             if (item.equals("bye")) {
                 break;
-            } else {
+            } else if (item.equals("list")) {
                 System.out.println("____________________________________________________________");
-                System.out.println(item);
+                for (int i = 1; i <= size; i++) {
+                    System.out.println(i + ". " + listItem[i]);
+                }
+                System.out.println("____________________________________________________________");
+            } else {
+                size++;
+                listItem[size] = item;
+                System.out.println("____________________________________________________________");
+                System.out.println("added: " + item);
                 System.out.println("____________________________________________________________");
             }
         }
