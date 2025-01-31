@@ -116,7 +116,7 @@ public class Nguyen {
                             throw new NguyenException("Dont have deadline");
                         }
                         String task = item.substring(8, indexBy);
-                        String by = item.substring(indexBy + 3);
+                        String by = item.substring(indexBy + 4);
                         listTask.add(new Deadline(task, by));
                     }
                     else if (type == TaskType.EVENT) {
@@ -135,8 +135,8 @@ public class Nguyen {
                             throw new NguyenException("Wrong syntax order: /from should stand before /to");
                         }
                         String task = item.substring(5, indexFrom);
-                        String from = item.substring(indexFrom + 5, indexTo);
-                        String to = item.substring(indexTo + 3);
+                        String from = item.substring(indexFrom + 6, indexTo);
+                        String to = item.substring(indexTo + 4);
                         listTask.add(new Event(task, from, to));
                     } else {
                         throw new NguyenException("Invalid operation");
@@ -177,7 +177,7 @@ public class Nguyen {
                     writer.write(task.toString());
                     writer.newLine();
                 }
-                System.out.println("Tasks saved to " + filePath);
+                // System.out.println("Tasks saved to " + filePath);
             }
         } catch (IOException e) {
             System.out.println("Error saving tasks: " + e.getMessage());
