@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
-/**
- * Represents different types of tasks a user can create.
- */
-enum TaskType {
-    TODO, DEADLINE, EVENT;
-}
 
 /**
  * The main class for the chatbot "Nguyen".
@@ -15,6 +14,12 @@ enum TaskType {
  */
 public class Nguyen {
 
+    /**
+     * Represents different types of tasks a user can create.
+     */
+    enum TaskType {
+        TODO, DEADLINE, EVENT;
+    }
     /**
      * The main method that runs the chatbot.
      * It continuously takes user input and processes different commands.
@@ -141,6 +146,7 @@ public class Nguyen {
                     System.out.println(listTask.get(listTask.size() - 1));
                     System.out.println("Now you have " + listTask.size() + " tasks in the list.");
                 }
+                saveTask(listTask);
             }
             // Handles custom exceptions
             catch (NguyenException e) {
@@ -159,5 +165,22 @@ public class Nguyen {
         System.out.println("____________________________________________________________");
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("____________________________________________________________");
+    }
+
+    private static void saveTask(ArrayList<Task> listTask) {
+        String filePath = "./data/Nguyen.txt";
+        try {
+            // clear the existed file
+            new FileWriter(filePath, false).close();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (Task task : listTask) {
+                    writer.write(task.toString());
+                    writer.newLine();
+                }
+                System.out.println("Tasks saved to " + filePath);
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+        }
     }
 }
