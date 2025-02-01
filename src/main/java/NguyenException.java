@@ -1,7 +1,9 @@
+import java.io.IOException;
+
 /**
  * Custom exception class for handling errors in the Nguyen chatbot.
  */
-public class NguyenException extends Exception {
+public class NguyenException extends IOException {
 
     /**
      * Constructs a new NguyenException with the specified error message.
