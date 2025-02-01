@@ -1,3 +1,5 @@
+package nguyen;
+
 public class Command {
     private boolean isExit;
     private String item;

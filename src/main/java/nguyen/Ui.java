@@ -1,3 +1,5 @@
+package nguyen;
+
 import java.util.Scanner;
 
 public class Ui {
