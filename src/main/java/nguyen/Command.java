@@ -1,5 +1,8 @@
 package nguyen;
-
+/**
+ * Class to execute given command line
+ *
+ */
 public class Command {
     private boolean isExit;
     private String item;
@@ -23,7 +26,7 @@ public class Command {
      * @param storage The storage for saving tasks.
      * @throws NguyenException If the command is invalid or there is an error in task handling.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws NguyenException{
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws NguyenException {
         // Exit if the user inputs "bye"
         if (item.equals("bye")) {
             isExit = true;
@@ -32,30 +35,19 @@ public class Command {
         // Displays all tasks in the list
         if (item.equals("list")) {
             taskList.printList();
-        }
-        // Deletes a task based on its index
-        else if (item.startsWith("delete")) {
+        } else if (item.startsWith("delete")) {
             int number = Integer.parseInt(item.substring(7));
             taskList.delete(number);
-        }
-        // Marks a task as completed
-        else if (item.startsWith("mark")) {
+        } else if (item.startsWith("mark")) {
             int number = Integer.parseInt(item.substring(5));
             taskList.mark(number);
-        }
-        // Unmarks a task (marks as not done)
-        else if (item.startsWith("unmark")) {
+        } else if (item.startsWith("unmark")) {
             int number = Integer.parseInt(item.substring(7));
             taskList.unMark(number);
-        }
-        else if (item.startsWith("find")) {
+        } else if (item.startsWith("find")) {
             taskList.find(item.substring(5));
-        }
-        // Adds a new task
-        else {
+        } else {
             TaskType type;
-
-            // Determines the task type
             if (item.startsWith("todo")) {
                 type = TaskType.TODO;
             } else if (item.startsWith("deadline")) {

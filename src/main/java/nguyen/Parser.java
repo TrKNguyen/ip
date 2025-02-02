@@ -35,7 +35,7 @@ public class Parser {
             String to = line.substring(line.indexOf("to:") + 4, line.length() - 1);
             task = new Event(description, from, to);
         }
-        if (line.substring(4,5).equals("X")) {
+        if (line.substring(4, 5).equals("X")) {
             task.mark();
         }
         return task;

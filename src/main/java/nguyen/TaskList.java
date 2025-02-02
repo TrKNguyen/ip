@@ -110,7 +110,7 @@ public class TaskList {
     /**
      * Returns the list of matched task
      *
-     * @return The size of the task list.
+     * @param keyword The keyword need to search
      */
     public void find(String keyword) {
         System.out.println("Here are the matching tasks in your list:");
@@ -123,5 +123,4 @@ public class TaskList {
             }
         }
     }
-
 }

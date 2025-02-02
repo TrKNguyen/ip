@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Represents an event task that has a start time and an end time.
  */
 public class Event extends Task {
-    protected LocalDate from, to;
+    protected LocalDate from;
+    protected LocalDate to;
     /**
      * Constructs a new Event task with the given description, start time, and end time.
      *
@@ -27,6 +28,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: " + to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " to: " + to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

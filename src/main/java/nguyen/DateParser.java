@@ -7,7 +7,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-
+/**
+ * Parses date string input into local date
+ */
 public class DateParser {
     // List of supported date patterns in various formats
     private static final List<String> DATE_PATTERNS = Arrays.asList(
@@ -44,6 +46,7 @@ public class DateParser {
                 }
                 return LocalDate.parse(input, formatter);
             } catch (DateTimeParseException ignored) {
+                continue;
             }
         }
         return null;
