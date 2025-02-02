@@ -1,6 +1,7 @@
 package nguyen;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -18,20 +19,26 @@ public class DateParser {
             "dd/MM/yyyy",
             "MM-dd-yyyy",
             "dd MMM yyyy",
+            "d MMM yyyy",
             "MMM d yyyy",
             "MMM dd yyyy",
             "MMM dd, yyyy"
     );
 
     public static LocalDate parseDate(String input) {
+        input = input.trim();
+
         for (String pattern : DATE_PATTERNS) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern, Locale.ENGLISH);
-                input = input.trim();
-                LocalDate result = LocalDate.parse(input, formatter);
-                if (result != null) {
-                    return result;
+
+                if (pattern.contains("HHmm")) {
+                    LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
+                    return dateTime.toLocalDate();
                 }
+
+                return LocalDate.parse(input, formatter);
+
             } catch (DateTimeParseException ignored) {
             }
         }

@@ -42,6 +42,9 @@ public class Task {
         isDone = false;
     }
 
+    public boolean isMarked() {
+        return isDone;
+    }
     /**
      * Returns a string representation of the task, including its status.
      *
