@@ -25,6 +25,10 @@ public class Nguyen {
             tasks = new TaskList();
         }
     }
+    /**
+     * Runs the chatbot, continually accepting user input and executing corresponding commands.
+     * Ends the program when the bye command is given.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -47,9 +51,8 @@ public class Nguyen {
     }
     /**
      * The main method that runs the chatbot.
-     * It continuously takes user input and processes different commands.
      *
-     * @param args Command-line arguments (not used in this application).
+     * @param args Command-line arguments.
      */
     public static void main(String[] args) {
         new Nguyen("data/Nguyen.txt").run();

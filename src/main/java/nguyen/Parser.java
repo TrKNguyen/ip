@@ -1,9 +1,26 @@
 package nguyen;
 
+/**
+ * Parses user input into commands and tasks.
+ */
 public class Parser {
+    /**
+     * Converts a full command string into a Command object.
+     *
+     * @param fullCommand the full user input string
+     * @return a Command object representing the parsed command
+     * @throws NguyenException if the command is invalid
+     */
     public static Command parse(String fullCommand) throws NguyenException {
         return new Command(fullCommand);
     }
+
+    /**
+     * Converts a stored task string into a Task object.
+     *
+     * @param line the task string from storage
+     * @return a Task object representing the parsed task
+     */
     public static Task parseTask(String line) {
         Task task = null;
         if (line.startsWith("[T]")) {
@@ -24,5 +41,4 @@ public class Parser {
         }
         return task;
     }
-
 }

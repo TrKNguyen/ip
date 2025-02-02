@@ -3,12 +3,26 @@ package nguyen;
 public class Command {
     private boolean isExit;
     private String item;
-
+    /**
+     * Constructor for the Command class.
+     * Initializes the command with a string item.
+     * The isExit flag is set to false by default.
+     *
+     * @param item The command input by the user.
+     */
     public Command(String item) {
         this.item = item;
         isExit = false;
     }
-
+    /**
+     * Executes the command based on the user's input.
+     * Different actions are performed based on the command string.
+     *
+     * @param taskList The list of tasks that will be modified.
+     * @param ui The user interface for interacting with the user.
+     * @param storage The storage for saving tasks.
+     * @throws NguyenException If the command is invalid or there is an error in task handling.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws NguyenException{
         // Exit if the user inputs "bye"
         if (item.equals("bye")) {
@@ -96,7 +110,11 @@ public class Command {
         }
         storage.saveTask(taskList);
     }
-
+    /**
+     * Returns whether the exit command was given.
+     *
+     * @return true if the "bye" command was given, otherwise false.
+     */
     public boolean isExit() {
         return isExit;
     }

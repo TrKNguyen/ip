@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class DateParser {
+    // List of supported date patterns in various formats
     private static final List<String> DATE_PATTERNS = Arrays.asList(
             "yyyy-MM-dd HHmm",
             "yyyy/MM/dd HHmm",
@@ -24,7 +25,14 @@ public class DateParser {
             "MMM dd yyyy",
             "MMM dd, yyyy"
     );
-
+    /**
+     * Parses a date string into a LocalDate object.
+     * Tries to match the input string with multiple date patterns and returns the corresponding LocalDate.
+     * If no valid date format is found, returns null.
+     *
+     * @param input The date string to be parsed.
+     * @return A LocalDate object if a valid format is found, otherwise null.
+     */
     public static LocalDate parseDate(String input) {
         input = input.trim();
 
