@@ -35,18 +35,14 @@ public class DateParser {
      */
     public static LocalDate parseDate(String input) {
         input = input.trim();
-
         for (String pattern : DATE_PATTERNS) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern, Locale.ENGLISH);
-
                 if (pattern.contains("HHmm")) {
                     LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
                     return dateTime.toLocalDate();
                 }
-
                 return LocalDate.parse(input, formatter);
-
             } catch (DateTimeParseException ignored) {
             }
         }

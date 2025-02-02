@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     protected LocalDate from, to;
-
     /**
      * Constructs a new Event task with the given description, start time, and end time.
      *
@@ -21,7 +20,6 @@ public class Event extends Task {
         this.from = DateParser.parseDate(from);
         this.to = DateParser.parseDate(to);
     }
-
     /**
      * Returns a string representation of the event task.
      *

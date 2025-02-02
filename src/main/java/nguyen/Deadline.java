@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     protected LocalDate by;
-
     /**
      * Constructs a new Deadline task with the given description and deadline.
      *
@@ -19,7 +18,6 @@ public class Deadline extends Task {
         super(description);
         this.by = DateParser.parseDate(by);
     }
-
     /**
      * Returns a string representation of the deadline task.
      *
@@ -29,5 +27,4 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
-
 }

@@ -14,7 +14,6 @@ public class Parser {
     public static Command parse(String fullCommand) throws NguyenException {
         return new Command(fullCommand);
     }
-
     /**
      * Converts a stored task string into a Task object.
      *
