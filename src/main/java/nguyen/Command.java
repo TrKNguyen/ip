@@ -48,6 +48,9 @@ public class Command {
             int number = Integer.parseInt(item.substring(7));
             taskList.unMark(number);
         }
+        else if (item.startsWith("find")) {
+            taskList.find(item.substring(5));
+        }
         // Adds a new task
         else {
             TaskType type;

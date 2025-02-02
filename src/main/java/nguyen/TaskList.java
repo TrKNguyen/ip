@@ -107,4 +107,21 @@ public class TaskList {
     public int size() {
         return taskList.size();
     }
+    /**
+     * Returns the list of matched task
+     *
+     * @return The size of the task list.
+     */
+    public void find(String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        int countId = 0;
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                countId++;
+                System.out.println(countId + ". " + task);
+            }
+        }
+    }
+
 }

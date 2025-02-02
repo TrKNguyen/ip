@@ -54,4 +54,10 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "]" + description;
     }
+    /**
+     * Returns description.
+     */
+    public String getDescription() {
+        return description;
+    }
 }
