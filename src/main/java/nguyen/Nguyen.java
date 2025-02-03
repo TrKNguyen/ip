@@ -1,5 +1,7 @@
 package nguyen;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 enum TaskType {
     TODO, DEADLINE, EVENT;
 }
@@ -11,7 +13,11 @@ public class Nguyen {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
+    public Nguyen() {
+        ui = new Ui();
+        tasks = new TaskList();
+        storage = new Storage("data/ChatBot.txt");
+    }
     /**
      * Represents different types of tasks a user can create.
      */
@@ -48,6 +54,25 @@ public class Nguyen {
                 ui.showLine();
             }
         }
+    }
+    public String getResponse(String userInput) {
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream capturingOut = new PrintStream(baos);
+        System.setOut(capturingOut);
+        try {
+            Command c = Parser.parse(userInput);
+            c.execute(tasks, ui, storage);
+            if (c.isExit()) {
+                ui.showBye();
+            }
+        } catch (NguyenException e) {
+            ui.showError(e.getMessage());
+        } finally {
+            System.out.flush();
+            System.setOut(originalOut);
+        }
+        return baos.toString();
     }
     /**
      * The main method that runs the chatbot.

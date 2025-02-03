@@ -48,14 +48,14 @@ public class Ui {
      * @param errorMessage The error message to be displayed.
      */
     public void showError(String errorMessage) {
-        System.err.println("Error: " + errorMessage);
+        System.out.println("Error: " + errorMessage);
     }
 
     /**
      * Displays a generic loading error message when there is an issue loading tasks.
      */
     public void showLoadingError() {
-        System.err.println("Loading Error");
+        System.out.println("Loading Error");
     }
 
     /**
