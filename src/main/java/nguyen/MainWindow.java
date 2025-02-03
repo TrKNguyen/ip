@@ -23,15 +23,15 @@ public class MainWindow extends AnchorPane {
     private Nguyen nguyen;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image nguyenImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
-    public void setDuke(Nguyen d) {
+    /** Injects the Nguyen instance */
+    public void setNguyen(Nguyen d) {
         nguyen = d;
     }
 
@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
         String response = nguyen.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, nguyenImage)
         );
         userInput.clear();
     }
