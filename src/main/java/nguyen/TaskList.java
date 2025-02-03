@@ -85,8 +85,11 @@ public class TaskList {
      *
      * @param task The task to add.
      */
-    public void add(Task task) {
-        taskList.add(task);
+    @SafeVarargs
+    public final void add(Task... tasks) {
+        for (Task task : tasks) {
+            taskList.add(task);
+        }
     }
 
     /**
