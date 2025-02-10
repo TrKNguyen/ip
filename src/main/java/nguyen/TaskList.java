@@ -1,6 +1,7 @@
 package nguyen;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents a list of tasks and provides methods to manipulate the tasks.
@@ -30,9 +31,12 @@ public class TaskList {
     public void printList() {
         assert taskList != null : "TaskList should not be null";
         System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= taskList.size(); i++) {
-            System.out.println(i + "." + taskList.get(i - 1));
-        }
+        AtomicInteger countId = new AtomicInteger(0);
+        taskList.stream()
+                .forEach(task -> {
+                    int currentId = countId.getAndIncrement();
+                    System.out.println((currentId) + "." + task);
+                });
     }
 
     /**
