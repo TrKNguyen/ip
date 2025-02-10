@@ -180,10 +180,7 @@ public class TaskList {
             String from = item.substring(indexFrom + 6, indexTo);
             String to = item.substring(indexTo + 4);
             taskList.add(new Event(task, from, to));
-        } else {
-            throw new NguyenException("Invalid operation");
         }
-
         System.out.println("Got it. I've added this task:");
         System.out.println(taskList.get(taskList.size() - 1));
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
