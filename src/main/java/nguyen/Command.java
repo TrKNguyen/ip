@@ -46,7 +46,10 @@ public class Command {
             taskList.unMark(number);
         } else if (item.startsWith("find")) {
             taskList.find(item.substring(5));
-        } else {
+        } else if (item.startsWith("sort")) {
+            taskList.sort(item.substring(5));
+        }
+        else {
             taskList.handleTask(item);
         }
         storage.saveTask(taskList);

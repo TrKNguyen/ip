@@ -1,5 +1,7 @@
 package nguyen;
 
+import java.time.LocalDate;
+
 /**
  * Represents a task with a description and a completion status.
  */
@@ -41,9 +43,24 @@ public class Task {
     public void unMark() {
         isDone = false;
     }
-
+    /**
+     * Check whether the task was marked.
+     */
     public boolean isMarked() {
         return isDone;
+    }
+
+    /**
+     * Return the type of this task
+     **/
+    public String getType() {
+        return "";
+    }
+    /**
+     * Return the date
+     **/
+    public LocalDate getDate() {
+        return null;
     }
     /**
      * Returns a string representation of the task, including its status.

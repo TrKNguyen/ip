@@ -1,6 +1,8 @@
 package nguyen;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -31,7 +33,7 @@ public class TaskList {
     public void printList() {
         assert taskList != null : "TaskList should not be null";
         System.out.println("Here are the tasks in your list:");
-        AtomicInteger countId = new AtomicInteger(0);
+        AtomicInteger countId = new AtomicInteger(1);
         taskList.stream()
                 .forEach(task -> {
                     int currentId = countId.getAndIncrement();
@@ -136,6 +138,48 @@ public class TaskList {
                 countId++;
                 System.out.println(countId + ". " + task);
             }
+        }
+    }
+    /**
+     * Sort task some specific task
+     *
+     * @param taskType The task
+     */
+    public void sort(String taskType) throws NguyenException {
+        assert taskList != null : "TaskList should not be null";
+        taskType = taskType.trim();
+        if (!taskType.isEmpty()) {
+            taskType.concat(" ");
+        }
+        System.out.println("Here are the sorted " + taskType + "tasks in your list:");
+        if (taskType.startsWith("todo")) {
+            AtomicInteger countId = new AtomicInteger(1);
+            taskList.stream()
+                    .filter(task -> (task.getType() == "todo"))
+                    .forEach(task -> {
+                        int currentId = countId.getAndIncrement();
+                        System.out.println(currentId + "." + task);
+                    });
+        } else if (taskType.startsWith("deadline")) {
+            AtomicInteger countId = new AtomicInteger(1);
+            taskList.stream()
+                    .filter(task -> (task.getType() == "deadline"))
+                    .sorted(Comparator.comparing(Task::getDate))
+                    .forEach(task -> {
+                        int currentId = countId.getAndIncrement();
+                        System.out.println(currentId + "." + task);
+                    });
+        } else if (taskType.startsWith("event")) {
+            AtomicInteger countId = new AtomicInteger(1);
+            taskList.stream()
+                    .filter(task -> (task.getType() == "event"))
+                    .sorted(Comparator.comparing(Task::getDate))
+                    .forEach(task -> {
+                        int currentId = countId.getAndIncrement();
+                        System.out.println(currentId + "." + task);
+                    });
+        } else {
+            throw new NguyenException("Invalid sort method");
         }
     }
     /**

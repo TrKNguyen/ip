@@ -22,6 +22,20 @@ public class Event extends Task {
         this.to = DateParser.parseDate(to);
     }
     /**
+     * Return the type of this task
+     **/
+    @Override
+    public String getType() {
+        return "event";
+    }
+    /**
+     * Return the date
+     **/
+    @Override
+    public LocalDate getDate() {
+        return from;
+    }
+    /**
      * Returns a string representation of the event task.
      *
      * @return A formatted string representing the event task.

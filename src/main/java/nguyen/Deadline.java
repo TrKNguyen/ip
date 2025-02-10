@@ -19,6 +19,20 @@ public class Deadline extends Task {
         this.by = DateParser.parseDate(by);
     }
     /**
+     * Return the type of this task
+     **/
+    @Override
+    public String getType() {
+        return "deadline";
+    }
+    /**
+     * Return the date
+     **/
+    @Override
+    public LocalDate getDate() {
+        return by;
+    }
+    /**
      * Returns a string representation of the deadline task.
      *
      * @return A formatted string representing the deadline task.

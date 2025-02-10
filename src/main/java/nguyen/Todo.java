@@ -13,7 +13,13 @@ public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
-
+    /**
+     * Return the type of this task
+     **/
+    @Override
+    public String getType() {
+        return "todo";
+    }
     /**
      * Returns a string representation of the to-do task.
      *
