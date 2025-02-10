@@ -46,7 +46,6 @@ public class DateParser {
                 }
                 return LocalDate.parse(input, formatter);
             } catch (DateTimeParseException ignored) {
-                continue;
             }
         }
         return null;
