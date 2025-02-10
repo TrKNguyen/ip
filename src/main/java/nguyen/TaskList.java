@@ -126,7 +126,11 @@ public class TaskList {
             }
         }
     }
-
+    /**
+     * Handle every tasks
+     *
+     * @param item The task information
+     */
     public void handleTask(String item) throws NguyenException {
         TaskType type;
         if (item.startsWith("todo")) {
