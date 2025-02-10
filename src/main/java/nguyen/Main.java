@@ -90,7 +90,7 @@ public class Main extends Application {
         String dukeText = nguyen.getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getDukeDialog(dukeText, dukeImage)
+                DialogBox.getNguyenDialog(dukeText, dukeImage)
         );
         userInput.clear();
     }
