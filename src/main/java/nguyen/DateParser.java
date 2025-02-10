@@ -46,7 +46,9 @@ public class DateParser {
                 }
                 return LocalDate.parse(input, formatter);
             } catch (DateTimeParseException ignored) {
-                continue;
+                // If there any error in DateTimeParse:
+                // it's what I expected
+                // just continue to handle next possible time format of input
             }
         }
         return null;

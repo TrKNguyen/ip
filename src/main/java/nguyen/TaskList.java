@@ -146,14 +146,14 @@ public class TaskList {
         // Handles different types of tasks
         if (type == TaskType.TODO) {
             if (item.length() == 4) {
-                throw new NguyenException("Empty task is valid task");
+                throw new NguyenException("Empty task is invalid task");
             }
             String task = item.substring(4);
             taskList.add(new Todo(task));
         } else if (type == TaskType.DEADLINE) {
             int indexBy = item.indexOf("/by");
             if (item.length() == 8) {
-                throw new NguyenException("Empty task is valid task");
+                throw new NguyenException("Empty task is invalid task");
             }
             if (indexBy == -1) {
                 throw new NguyenException("Dont have deadline");
@@ -165,7 +165,7 @@ public class TaskList {
             int indexFrom = item.indexOf("/from");
             int indexTo = item.indexOf("/to");
             if (item.length() == 5) {
-                throw new NguyenException("Empty task is valid task");
+                throw new NguyenException("Empty task is invalid task");
             }
             if (indexFrom == -1) {
                 throw new NguyenException("Dont have starting time");
