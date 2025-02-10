@@ -28,6 +28,7 @@ public class TaskList {
      * Displays all tasks in the list with their corresponding indices.
      */
     public void printList() {
+        assert taskList != null : "TaskList should not be null";
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
             System.out.println(i + "." + taskList.get(i - 1));
@@ -41,6 +42,7 @@ public class TaskList {
      * @throws NguyenException If the index is out of range.
      */
     public void delete(int number) throws NguyenException {
+        assert taskList != null : "TaskList should not be null";
         if (number > taskList.size() || number <= 0) {
             throw new NguyenException("Out of range in list of task");
         }
@@ -57,6 +59,7 @@ public class TaskList {
      * @throws NguyenException If the index is out of range.
      */
     public void mark(int number) throws NguyenException {
+        assert taskList != null : "TaskList should not be null";
         if (number > taskList.size() || number <= 0) {
             throw new NguyenException("Out of range in list of task");
         }
@@ -72,6 +75,7 @@ public class TaskList {
      * @throws NguyenException If the index is out of range.
      */
     public void unMark(int number) throws NguyenException {
+        assert taskList != null : "TaskList should not be null";
         if (number > taskList.size() || number <= 0) {
             throw new NguyenException("Out of range in list of task");
         }
@@ -87,6 +91,7 @@ public class TaskList {
      */
     @SafeVarargs
     public final void add(Task... tasks) {
+        assert taskList != null : "TaskList should not be null";
         for (Task task : tasks) {
             taskList.add(task);
         }
@@ -99,6 +104,7 @@ public class TaskList {
      * @return The task at the specified index.
      */
     public Task get(int number) {
+        assert taskList != null : "TaskList should not be null";
         return taskList.get(number);
     }
 
@@ -108,6 +114,7 @@ public class TaskList {
      * @return The size of the task list.
      */
     public int size() {
+        assert taskList != null : "TaskList should not be null";
         return taskList.size();
     }
     /**
@@ -116,6 +123,7 @@ public class TaskList {
      * @param keyword The keyword need to search
      */
     public void find(String keyword) {
+        assert taskList != null : "TaskList should not be null";
         System.out.println("Here are the matching tasks in your list:");
         int countId = 0;
         for (int i = 0; i < taskList.size(); i++) {

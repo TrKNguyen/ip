@@ -19,6 +19,7 @@ public class Storage {
      * @param filePath The path to the file where tasks are stored.
      */
     public Storage(String filePath) {
+        assert filePath != null && !filePath.trim().isEmpty() : "File path must not be null or empty";
         this.filePath = filePath;
     }
 
@@ -31,13 +32,12 @@ public class Storage {
     public ArrayList<Task> load() throws NguyenException {
         ArrayList<Task> taskList = new ArrayList<>();
         String line;
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            assert reader != null : "BufferedReader should not be null";
             while ((line = reader.readLine()) != null) {
                 Task task = Parser.parseTask(line);
-                if (task != null) {
-                    taskList.add(task);
-                }
+                assert task != null : "Parsed task should not be null";
+                taskList.add(task);
             }
         } catch (IOException e) {
             throw new NguyenException(e.getMessage());
@@ -51,12 +51,16 @@ public class Storage {
      * @param taskList The TaskList containing tasks to be saved.
      */
     public void saveTask(TaskList taskList) {
+        assert taskList != null : "TaskList must not be null";
         try {
             // Clear the existing file content
             new FileWriter(filePath, false).close();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                assert writer != null : "BufferedWriter should not be null";
                 for (int i = 0; i < taskList.size(); i++) {
-                    writer.write(taskList.get(i).toString());
+                    Task task = taskList.get(i);
+                    assert task != null : "Task should not be null";
+                    writer.write(task.toString());
                     writer.newLine();
                 }
             }

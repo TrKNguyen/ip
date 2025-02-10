@@ -3,16 +3,16 @@ package nguyen;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 enum TaskType {
-    TODO, DEADLINE, EVENT;
+    TODO, DEADLINE, EVENT
 }
 /**
  * The main class for the chatbot "Nguyen".
  * This chatbot allows users to manage tasks, including adding, deleting, marking, and listing them.
  */
 public class Nguyen {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
     public Nguyen() {
         ui = new Ui();
         tasks = new TaskList();
