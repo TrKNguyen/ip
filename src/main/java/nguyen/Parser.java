@@ -25,7 +25,7 @@ public class Parser {
      * @return a Task object representing the parsed task
      */
     public static Task parseTask(String line) {
-        assert line != null : "Task line cannot be null";
+        assert line != null : "Task cannot be null";
         assert !line.trim().isEmpty() : "Task line cannot be empty";
         assert line.length() >= 6 : "Task line should have sufficient length for valid parsing";
 
