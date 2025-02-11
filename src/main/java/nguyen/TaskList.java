@@ -34,11 +34,7 @@ public class TaskList {
         assert taskList != null : "TaskList should not be null";
         System.out.println("Here are the tasks in your list:");
         AtomicInteger countId = new AtomicInteger(1);
-        taskList.stream()
-                .forEach(task -> {
-                    int currentId = countId.getAndIncrement();
-                    System.out.println((currentId) + "." + task);
-                });
+
     }
 
     /**
