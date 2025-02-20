@@ -24,7 +24,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String dialogStyle) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -33,10 +33,17 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.getStylesheets().add(getClass().getResource("/view/style.css").toExternalForm());
 
+        // Apply correct style
+        this.getStyleClass().add("dialog-box");
+        this.getStyleClass().add(dialogStyle);
         dialog.setText(text);
         displayPicture.setImage(img);
+
+
     }
+
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
@@ -49,12 +56,16 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "user-dialog");
     }
 
     public static DialogBox getNguyenDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "bot-dialog");
         db.flip();
         return db;
+    }
+
+    public static DialogBox getErrorDialog(String text) {
+        return new DialogBox(text, null, "error-dialog");
     }
 }

@@ -24,7 +24,7 @@ public class Parser {
      * @param line the task string from storage
      * @return a Task object representing the parsed task
      */
-    public static Task parseTask(String line) {
+    public static Task parseTask(String line) throws NguyenException{
         assert line != null : "Task cannot be null";
         assert !line.trim().isEmpty() : "Task line cannot be empty";
         assert line.length() >= 6 : "Task line should have sufficient length for valid parsing";

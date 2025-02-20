@@ -16,7 +16,7 @@ class TaskListTest {
     }
 
     @Test
-    void testAddDeadline() {
+    void testAddDeadline() throws NguyenException{
         TaskList taskList = new TaskList();
         Task deadline = new Deadline("Do Competitive Programming", "Dec 2 2019");
         taskList.add(deadline);
@@ -26,7 +26,7 @@ class TaskListTest {
     }
 
     @Test
-    void testAddEvent() {
+    void testAddEvent() throws NguyenException{
         TaskList taskList = new TaskList();
         Task event = new Event("Learn CS2103T", "Dec 2 2019", "Dec 2 2019");
         taskList.add(event);
@@ -68,7 +68,7 @@ class TaskListTest {
     }
 
     @Test
-    void testMarkTaskOutOfRange() {
+    void testMarkTaskOutOfRange() throws NguyenException{
         TaskList taskList = new TaskList();
         Task deadline = new Deadline("Do Competitive Programming", "Dec 2 2019");
         taskList.add(deadline);
@@ -100,7 +100,7 @@ class TaskListTest {
     }
 
     @Test
-    void testPrintList() {
+    void testPrintList() throws NguyenException{
         TaskList taskList = new TaskList();
         taskList.add(new Todo("Meet Friends"));
         taskList.add(new Deadline("Do Competitive Programming", "Dec 2 2019"));

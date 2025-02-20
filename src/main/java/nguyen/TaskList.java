@@ -32,6 +32,7 @@ public class TaskList {
      * Displays all tasks in the list with their indices.
      */
     public void printList() {
+        //System.out.println(taskList);
         assert taskList != null : "TaskList should not be null";
         System.out.println("Here are the tasks in your list:");
         AtomicInteger countId = new AtomicInteger(1);

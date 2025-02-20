@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class DateParserTest {
 
     @Test
-    void testValidDates() {
+    void testValidDates() throws NguyenException{
         assertEquals(LocalDate.of(2024, 1, 1), DateParser.parseDate("2024-01-01"));
         assertEquals(LocalDate.of(2024, 1, 1), DateParser.parseDate("2024/01/01"));
         assertEquals(LocalDate.of(2024, 1, 1), DateParser.parseDate("01/01/2024"));
@@ -26,7 +26,7 @@ class DateParserTest {
     }
 
     @Test
-    void testInvalidDates() {
+    void testInvalidDates() throws NguyenException{
         assertNull(DateParser.parseDate("2024-13-01"));
         assertNull(DateParser.parseDate("Hello World"));
         assertNull(DateParser.parseDate(""));

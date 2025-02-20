@@ -35,7 +35,7 @@ public class DateParser {
      * @param input The date string to be parsed.
      * @return A LocalDate object if a valid format is found, otherwise null.
      */
-    public static LocalDate parseDate(String input) {
+    public static LocalDate parseDate(String input) throws NguyenException{
         input = input.trim();
         for (String pattern : DATE_PATTERNS) {
             try {
@@ -46,11 +46,11 @@ public class DateParser {
                 }
                 return LocalDate.parse(input, formatter);
             } catch (DateTimeParseException ignored) {
-                // If there any error in DateTimeParse:
+                // If there's any error in DateTimeParse:
                 // it's what I expected
                 // just continue to handle next possible time format of input
             }
         }
-        return null;
+        throw new NguyenException("Invalid Date");
     }
 }
