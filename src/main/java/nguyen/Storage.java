@@ -50,7 +50,7 @@ public class Storage {
      *
      * @param taskList The TaskList containing tasks to be saved.
      */
-    public void saveTask(TaskList taskList) {
+    public void saveTask(TaskList taskList) throws NguyenException {
         assert taskList != null : "TaskList must not be null";
         try {
             // Clear the existing file content
@@ -65,7 +65,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error saving tasks: " + e.getMessage());
+            throw new NguyenException("Error saving tasks: " + e.getMessage());
         }
     }
 }
