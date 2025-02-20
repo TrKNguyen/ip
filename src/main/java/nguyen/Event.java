@@ -20,6 +20,9 @@ public class Event extends Task {
         super(description);
         this.from = DateParser.parseDate(from);
         this.to = DateParser.parseDate(to);
+        if (this.from.isAfter(this.to)) {
+            throw new NguyenException("Event start time cannot be after the end time");
+        }
     }
     /**
      * Return the type of this task

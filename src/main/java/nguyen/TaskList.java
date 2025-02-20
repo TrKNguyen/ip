@@ -32,9 +32,8 @@ public class TaskList {
      * Displays all tasks in the list with their indices.
      */
     public void printList() {
-        //System.out.println(taskList);
         assert taskList != null : "TaskList should not be null";
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("Alright, here is what is on your plate:");
         AtomicInteger countId = new AtomicInteger(1);
         taskList.forEach(task -> System.out.println(countId.getAndIncrement() + ". " + task));
     }
@@ -48,12 +47,12 @@ public class TaskList {
     public void delete(int number) throws NguyenException {
         assert taskList != null : "TaskList should not be null";
         if (number <= 0 || number > taskList.size()) {
-            throw new NguyenException("Out of range in list of tasks");
+            throw new NguyenException("Dude, that task does not even exist");
         }
-        System.out.println("Got it. I've removed this task:");
+        System.out.println("Chill, I got rid of this for you:");
         System.out.println(taskList.get(number - 1));
         taskList.remove(number - 1);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("You’ve got " + taskList.size() + " tasks left No rush");
     }
 
     /**
@@ -65,10 +64,10 @@ public class TaskList {
     public void mark(int number) throws NguyenException {
         assert taskList != null : "TaskList should not be null";
         if (number <= 0 || number > taskList.size()) {
-            throw new NguyenException("Out of range in list of tasks");
+            throw new NguyenException("Nah, that task is not on the list");
         }
         taskList.get(number - 1).mark();
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("Nice, that is one less thing to worry about:");
         System.out.println(taskList.get(number - 1));
     }
 
@@ -81,10 +80,10 @@ public class TaskList {
     public void unMark(int number) throws NguyenException {
         assert taskList != null : "TaskList should not be null";
         if (number <= 0 || number > taskList.size()) {
-            throw new NguyenException("Out of range in list of tasks");
+            throw new NguyenException("Dude, there is no such task to unmark.");
         }
         taskList.get(number - 1).unMark();
-        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println("Alright, I will pretend that did not happen:");
         System.out.println(taskList.get(number - 1));
     }
 
@@ -129,7 +128,7 @@ public class TaskList {
      */
     public void find(String keyword) {
         assert taskList != null : "TaskList should not be null";
-        System.out.println("Here are the matching tasks in your list:");
+        System.out.println("Here is what I found for " + keyword + ":");
         int countId = 0;
         for (Task task : taskList) {
             if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
@@ -146,8 +145,11 @@ public class TaskList {
      */
     public void sort(String taskType) throws NguyenException {
         assert taskList != null : "TaskList should not be null";
+        if (taskList.isEmpty()) {
+            throw new NguyenException("There is nothing to sort, bro. Try adding some tasks first.");
+        }
         taskType = taskType.trim();
-        System.out.println("Here are the sorted " + taskType + " tasks in your list:");
+        System.out.println("Alright, here is your sorted " + taskType + " list:");
         switch (taskType.toLowerCase()) {
             case "todo":
                 sortTodoTask();
@@ -159,7 +161,7 @@ public class TaskList {
                 sortEventTask();
                 break;
             default:
-                throw new NguyenException("Invalid sort method");
+                throw new NguyenException("Uh that is not a valid task type");
         }
     }
 
@@ -247,10 +249,10 @@ public class TaskList {
         } else if (item.startsWith("event")) {
             handleEventTask(item);
         } else {
-            throw new NguyenException("Invalid task type");
+            throw new NguyenException("Nah man, that is not a real task type");
         }
-        System.out.println("Got it. I've added this task:");
+        System.out.println("Cool, I added this to your list:");
         System.out.println(taskList.get(taskList.size() - 1));
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Now you are got " + taskList.size() + " things to do or not");
     }
 }

@@ -6,20 +6,20 @@
 
 /* User messages (Blue for better readability) */
 .user-dialog {
-    -fx-background-color: #D0E8FF; /* Light Blue */
-    -fx-text-fill: #000000; /* Black text */
+    -fx-background-color: #D0E8FF;
+    -fx-text-fill: #000000;
 }
 
 /* Bot messages (Gray for contrast) */
 .bot-dialog {
-    -fx-background-color: #F0F0F0; /* Light Gray */
-    -fx-text-fill: #000000; /* Black text */
+    -fx-background-color: #F0F0F0;
+    -fx-text-fill: #000000;
 }
 
 /* Error messages (Red to stand out) */
 .error-dialog {
-    -fx-background-color: #FF6B6B; /* Light Red */
-    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-background-color: #FF6B6B;
+    -fx-text-fill: #FFFFFF;
 }
 
 /* Styling text in the dialog */

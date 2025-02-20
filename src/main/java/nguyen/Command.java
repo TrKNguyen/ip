@@ -34,26 +34,32 @@ public class Command {
         }
 
         // Displays all tasks in the list
-        if (item.equals("list")) {
-            taskList.printList();
-        } else if (item.startsWith("delete")) {
-            int number = Integer.parseInt(item.substring(7));
-            taskList.delete(number);
-        } else if (item.startsWith("mark")) {
-            int number = Integer.parseInt(item.substring(5));
-            taskList.mark(number);
-        } else if (item.startsWith("unmark")) {
-            int number = Integer.parseInt(item.substring(7));
-            taskList.unMark(number);
-        } else if (item.startsWith("find")) {
-            taskList.find(item.substring(5));
-        } else if (item.startsWith("sort")) {
-            taskList.sort(item.substring(5));
+        try {
+            if (item.equals("list")) {
+                taskList.printList();
+            } else if (item.startsWith("delete")) {
+                int number = Integer.parseInt(item.substring(7));
+                taskList.delete(number);
+            } else if (item.startsWith("mark")) {
+                int number = Integer.parseInt(item.substring(5));
+                taskList.mark(number);
+            } else if (item.startsWith("unmark")) {
+                int number = Integer.parseInt(item.substring(7));
+                taskList.unMark(number);
+            } else if (item.startsWith("find")) {
+                taskList.find(item.substring(5));
+            } else if (item.startsWith("sort")) {
+                taskList.sort(item.substring(5));
+            } else {
+                taskList.handleTask(item);
+            }
+            storage.saveTask(taskList);
+        } catch (NguyenException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new NguyenException("Invalid command");
         }
-        else {
-            taskList.handleTask(item);
-        }
-        storage.saveTask(taskList);
+
     }
     /**
      * Returns whether the exit command was given.
