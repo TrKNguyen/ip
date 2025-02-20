@@ -33,7 +33,7 @@ public class TaskList {
      */
     public void printList() {
         assert taskList != null : "TaskList should not be null";
-        System.out.println("Alright, here is what is on your plate:");
+        System.out.println("Alright, there are tasks in your list:");
         AtomicInteger countId = new AtomicInteger(1);
         taskList.forEach(task -> System.out.println(countId.getAndIncrement() + ". " + task));
     }
@@ -47,12 +47,12 @@ public class TaskList {
     public void delete(int number) throws NguyenException {
         assert taskList != null : "TaskList should not be null";
         if (number <= 0 || number > taskList.size()) {
-            throw new NguyenException("Dude, that task does not even exist");
+            throw new NguyenException("Bro, that task does not even exist");
         }
         System.out.println("Chill, I got rid of this for you:");
         System.out.println(taskList.get(number - 1));
         taskList.remove(number - 1);
-        System.out.println("You’ve got " + taskList.size() + " tasks left No rush");
+        System.out.println("You have got " + taskList.size() + " tasks left No rush");
     }
 
     /**
@@ -80,7 +80,7 @@ public class TaskList {
     public void unMark(int number) throws NguyenException {
         assert taskList != null : "TaskList should not be null";
         if (number <= 0 || number > taskList.size()) {
-            throw new NguyenException("Dude, there is no such task to unmark.");
+            throw new NguyenException("Bro, there is no such task to unmark.");
         }
         taskList.get(number - 1).unMark();
         System.out.println("Alright, I will pretend that did not happen:");
@@ -164,29 +164,34 @@ public class TaskList {
                 throw new NguyenException("Uh that is not a valid task type");
         }
     }
-
-    private void sortEventTask() {
-        printSortedTasks("event");
-    }
-
-    private void sortDeadlineTask() {
-        printSortedTasks("deadline");
-    }
-
-    private void sortTodoTask() {
-        printSortedTasks("todo");
-    }
-
     /**
-     * Prints sorted tasks of a specific type.
-     *
-     * @param taskType The type of task to print.
+     * Sort event tasks
      */
-    private void printSortedTasks(String taskType) {
+    private void sortEventTask() {
         AtomicInteger countId = new AtomicInteger(1);
         taskList.stream()
-                .filter(task -> task.getType().equals(taskType))
-                .sorted(Comparator.comparing(Task::getDate))
+                .filter(task -> task.getType().equals("event"))
+                .sorted(Comparator.comparing(Task::getDescription))
+                .forEach(task -> System.out.println(countId.getAndIncrement() + ". " + task));
+    }
+    /**
+     * Sort deadline tasks
+     */
+    private void sortDeadlineTask() {
+        AtomicInteger countId = new AtomicInteger(1);
+        taskList.stream()
+                .filter(task -> task.getType().equals("deadline"))
+                .sorted(Comparator.comparing(Task::getDescription))
+                .forEach(task -> System.out.println(countId.getAndIncrement() + ". " + task));
+    }
+    /**
+     * Sort todo tasks
+     */
+    private void sortTodoTask() {
+        AtomicInteger countId = new AtomicInteger(1);
+        taskList.stream()
+                .filter(task -> task.getType().equals("todo"))
+                .sorted(Comparator.comparing(Task::getDescription))
                 .forEach(task -> System.out.println(countId.getAndIncrement() + ". " + task));
     }
 
@@ -249,10 +254,10 @@ public class TaskList {
         } else if (item.startsWith("event")) {
             handleEventTask(item);
         } else {
-            throw new NguyenException("Nah man, that is not a real task type");
+            throw new NguyenException("Nah, that is not a real task type");
         }
         System.out.println("Cool, I added this to your list:");
         System.out.println(taskList.get(taskList.size() - 1));
-        System.out.println("Now you are got " + taskList.size() + " things to do or not");
+        System.out.println("Now you are got " + taskList.size() + " things to do");
     }
 }

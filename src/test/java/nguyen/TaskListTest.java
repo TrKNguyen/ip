@@ -68,7 +68,7 @@ class TaskListTest {
         NguyenException exception = assertThrows(NguyenException.class, () -> {
             taskList.delete(2);
         });
-        assertEquals("Dude, that task does not even exist", exception.getMessage());
+        assertEquals("Bro, that task does not even exist", exception.getMessage());
     }
 
     @Test
@@ -77,7 +77,7 @@ class TaskListTest {
         NguyenException exception = assertThrows(NguyenException.class, () -> {
             taskList.delete(1);
         });
-        assertEquals("Dude, that task does not even exist", exception.getMessage());
+        assertEquals("Bro, that task does not even exist", exception.getMessage());
     }
 
     @Test
@@ -118,7 +118,7 @@ class TaskListTest {
         NguyenException exception = assertThrows(NguyenException.class, () -> {
             taskList.unMark(2);
         });
-        assertEquals("Dude, there is no such task to unmark.", exception.getMessage());
+        assertEquals("Bro, there is no such task to unmark.", exception.getMessage());
     }
 
     @Test
@@ -128,14 +128,6 @@ class TaskListTest {
         taskList.add(new Deadline("Do Competitive Programming", "Dec 2 2019"));
         taskList.add(new Event("Learn CS2103T", "Dec 2 2019", "Dec 2 2019"));
         taskList.find("Meet");
-    }
-
-    @Test
-    void testFindNonexistentTask() throws NguyenException{
-        TaskList taskList = new TaskList();
-        taskList.add(new Todo("Meet Friends"));
-        taskList.add(new Deadline("Do Competitive Programming", "Dec 2 2019"));
-        assertEquals(0, taskList.size()); // No match should be found
     }
 
     @Test

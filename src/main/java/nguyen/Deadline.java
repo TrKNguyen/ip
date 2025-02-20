@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * @param description The description of the deadline task.
      * @param by The deadline date/time.
      */
-    public Deadline(String description, String by) throws NguyenException{
+    public Deadline(String description, String by) throws NguyenException {
         super(description);
         this.by = DateParser.parseDate(by);
     }

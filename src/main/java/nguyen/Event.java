@@ -16,7 +16,7 @@ public class Event extends Task {
      * @param from The start time of the event.
      * @param to The end time of the event.
      */
-    public Event(String description, String from, String to) throws NguyenException{
+    public Event(String description, String from, String to) throws NguyenException {
         super(description);
         this.from = DateParser.parseDate(from);
         this.to = DateParser.parseDate(to);

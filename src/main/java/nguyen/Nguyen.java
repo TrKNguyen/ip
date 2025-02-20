@@ -18,7 +18,7 @@ public class Nguyen {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
-
+    boolean isExit;
     /**
      * Default constructor that initializes the chatbot with default configurations.
      */
@@ -26,6 +26,7 @@ public class Nguyen {
         ui = new Ui();
         tasks = new TaskList();
         storage = new Storage("data/ChatBot.txt");
+        isExit = false;
     }
 
     /**
@@ -38,8 +39,10 @@ public class Nguyen {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
+            System.out.println(storage.load());
             tasks = new TaskList(storage.load());
         } catch (NguyenException e) {
+            System.out.println("why it wrong??");
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -51,7 +54,6 @@ public class Nguyen {
      */
     public void run() {
         ui.showWelcome();
-        boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
@@ -78,6 +80,9 @@ public class Nguyen {
      * @return The chatbot's response.
      */
     public String getResponse(String userInput) {
+        if (isExit) {
+            return "Nguyen Chat Bot has been terminated";
+        }
         PrintStream originalOut = System.out;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream capturingOut = new PrintStream(baos);
@@ -86,6 +91,7 @@ public class Nguyen {
             Command c = Parser.parse(userInput);
             c.execute(tasks, ui, storage);
             if (c.isExit()) {
+                isExit = true;
                 ui.showBye();
             }
         } catch (NguyenException e) {

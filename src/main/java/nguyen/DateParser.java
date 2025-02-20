@@ -35,7 +35,7 @@ public class DateParser {
      * @param input The date string to be parsed.
      * @return A LocalDate object if a valid format is found, otherwise null.
      */
-    public static LocalDate parseDate(String input) throws NguyenException{
+    public static LocalDate parseDate(String input) throws NguyenException {
         input = input.trim();
         for (String pattern : DATE_PATTERNS) {
             try {
