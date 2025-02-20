@@ -1,17 +1,14 @@
 package nguyen;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
  * Handles loading and saving tasks to a file.
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
+    private final File file;
 
     /**
      * Constructs a Storage object with the specified file path.
@@ -21,6 +18,25 @@ public class Storage {
     public Storage(String filePath) {
         assert filePath != null && !filePath.trim().isEmpty() : "File path must not be null or empty";
         this.filePath = filePath;
+        this.file = new File(filePath);
+        checkFileExists();
+    }
+
+    /**
+     * Check that the file and its parent directory exist.
+     */
+    private void checkFileExists() {
+        try {
+            File parentDir = file.getParentFile();
+            if (parentDir != null && !parentDir.exists()) {
+                parentDir.mkdirs();
+            }
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("Error ensuring storage file exists: " + e.getMessage());
+        }
     }
 
     /**
@@ -31,16 +47,14 @@ public class Storage {
      */
     public ArrayList<Task> load() throws NguyenException {
         ArrayList<Task> taskList = new ArrayList<>();
-        String line;
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            assert reader != null : "BufferedReader should not be null";
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
             while ((line = reader.readLine()) != null) {
                 Task task = Parser.parseTask(line);
-                assert task != null : "Parsed task should not be null";
                 taskList.add(task);
             }
         } catch (IOException e) {
-            throw new NguyenException(e.getMessage());
+            throw new NguyenException("Error loading tasks: " + e.getMessage());
         }
         return taskList;
     }
@@ -49,20 +63,14 @@ public class Storage {
      * Saves the tasks from the TaskList to the file.
      *
      * @param taskList The TaskList containing tasks to be saved.
+     * @throws NguyenException If an error occurs while writing the file.
      */
     public void saveTask(TaskList taskList) throws NguyenException {
         assert taskList != null : "TaskList must not be null";
-        try {
-            // Clear the existing file content
-            new FileWriter(filePath, false).close();
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-                assert writer != null : "BufferedWriter should not be null";
-                for (int i = 0; i < taskList.size(); i++) {
-                    Task task = taskList.get(i);
-                    assert task != null : "Task should not be null";
-                    writer.write(task.toString());
-                    writer.newLine();
-                }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            for (int i = 0; i < taskList.size(); i++) {
+                writer.write(taskList.get(i).toString());
+                writer.newLine();
             }
         } catch (IOException e) {
             throw new NguyenException("Error saving tasks: " + e.getMessage());
