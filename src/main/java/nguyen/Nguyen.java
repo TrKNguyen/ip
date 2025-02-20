@@ -18,7 +18,7 @@ public class Nguyen {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
-    boolean isExit;
+    private boolean isExit;
     /**
      * Default constructor that initializes the chatbot with default configurations.
      */

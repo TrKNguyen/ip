@@ -1,18 +1,22 @@
 package nguyen;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
+
+/**
+ * Main entry point for the Nguyen chatbot GUI.
+ */
 public class Main extends Application {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image NguyenImage = new Image(this.getClass().getResourceAsStream("/images/NguyenPro.jpg"));
+    private Image nguyenImage = new Image(this.getClass().getResourceAsStream("/images/NguyenPro.jpg"));
     private Nguyen nguyen = new Nguyen("data/ChatBot.txt");
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -20,6 +24,11 @@ public class Main extends Application {
     private Button sendButton;
     private Scene scene;
 
+    /**
+     * Sets up the UI and event handlers.
+     *
+     * @param stage Primary stage.
+     */
     @Override
     public void start(Stage stage) {
         //Setting up required components
@@ -81,15 +90,14 @@ public class Main extends Application {
     }
 
     /**
-     * Creates a dialog box containing user input, and appends it to
-     * the dialog container. Clears the user input after processing.
+     * Handles user input and updates the dialog container.
      */
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = nguyen.getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getNguyenDialog(dukeText, NguyenImage)
+                DialogBox.getNguyenDialog(dukeText, nguyenImage)
         );
         userInput.clear();
     }

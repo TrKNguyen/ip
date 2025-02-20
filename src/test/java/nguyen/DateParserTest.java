@@ -1,16 +1,18 @@
 package nguyen;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 class DateParserTest {
 
     @Test
-    void testValidDates() throws NguyenException{
+    void testValidDates() throws NguyenException {
         assertEquals(LocalDate.of(2024, 1, 1), DateParser.parseDate("2024-01-01"));
         assertEquals(LocalDate.of(2024, 1, 1), DateParser.parseDate("2024/01/01"));
         assertEquals(LocalDate.of(2024, 1, 1), DateParser.parseDate("01/01/2024"));

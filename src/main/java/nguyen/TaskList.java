@@ -1,6 +1,5 @@
 package nguyen;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -151,17 +150,17 @@ public class TaskList {
         taskType = taskType.trim();
         System.out.println("Alright, here is your sorted " + taskType + " list:");
         switch (taskType.toLowerCase()) {
-            case "todo":
-                sortTodoTask();
-                break;
-            case "deadline":
-                sortDeadlineTask();
-                break;
-            case "event":
-                sortEventTask();
-                break;
-            default:
-                throw new NguyenException("Uh that is not a valid task type");
+        case "todo":
+            sortTodoTask();
+            break;
+        case "deadline":
+            sortDeadlineTask();
+            break;
+        case "event":
+            sortEventTask();
+            break;
+        default:
+            throw new NguyenException("Uh that is not a valid task type");
         }
     }
     /**

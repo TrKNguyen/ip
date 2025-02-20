@@ -1,14 +1,16 @@
 package nguyen;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
-import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
 
 class TaskListTest {
 
     @Test
-    void testAddTodo() throws NguyenException{
+    void testAddTodo() throws NguyenException {
         TaskList taskList = new TaskList();
         Task todo = new Todo("Meet Friends");
         taskList.add(todo);
@@ -17,7 +19,7 @@ class TaskListTest {
     }
 
     @Test
-    void testAddDuplicateTask() throws NguyenException{
+    void testAddDuplicateTask() throws NguyenException {
         TaskList taskList = new TaskList();
         Task todo1 = new Todo("Meet Friends");
         Task todo2 = new Todo("Meet Friends");
@@ -29,7 +31,7 @@ class TaskListTest {
     }
 
     @Test
-    void testAddDeadline() throws NguyenException{
+    void testAddDeadline() throws NguyenException {
         TaskList taskList = new TaskList();
         Task deadline = new Deadline("Do Competitive Programming", "Dec 2 2019");
         taskList.add(deadline);
@@ -39,7 +41,7 @@ class TaskListTest {
     }
 
     @Test
-    void testAddEvent() throws NguyenException{
+    void testAddEvent() throws NguyenException {
         TaskList taskList = new TaskList();
         Task event = new Event("Learn CS2103T", "Dec 2 2019", "Dec 2 2019");
         taskList.add(event);
@@ -49,7 +51,7 @@ class TaskListTest {
     }
 
     @Test
-    void testDeleteTask() throws NguyenException{
+    void testDeleteTask() throws NguyenException {
         TaskList taskList = new TaskList();
         Task todo = new Todo("Meet Friends");
         Task deadline = new Deadline("Do Competitive Programming", "Dec 2 2019");
@@ -61,7 +63,7 @@ class TaskListTest {
     }
 
     @Test
-    void testDeleteTaskOutOfRange() throws NguyenException{
+    void testDeleteTaskOutOfRange() throws NguyenException {
         TaskList taskList = new TaskList();
         Task todo = new Todo("Meet Friends");
         taskList.add(todo);
@@ -72,7 +74,7 @@ class TaskListTest {
     }
 
     @Test
-    void testDeleteFromEmptyList() throws NguyenException{
+    void testDeleteFromEmptyList() throws NguyenException {
         TaskList taskList = new TaskList();
         NguyenException exception = assertThrows(NguyenException.class, () -> {
             taskList.delete(1);
@@ -81,7 +83,7 @@ class TaskListTest {
     }
 
     @Test
-    void testMarkTask() throws NguyenException{
+    void testMarkTask() throws NguyenException {
         TaskList taskList = new TaskList();
         Task event = new Event("Learn CS2103T", "Dec 2 2019", "Dec 2 2019");
         taskList.add(event);
@@ -90,7 +92,7 @@ class TaskListTest {
     }
 
     @Test
-    void testMarkTaskOutOfRange() throws NguyenException{
+    void testMarkTaskOutOfRange() throws NguyenException {
         TaskList taskList = new TaskList();
         Task deadline = new Deadline("Do Competitive Programming", "Dec 2 2019");
         taskList.add(deadline);
@@ -101,7 +103,7 @@ class TaskListTest {
     }
 
     @Test
-    void testUnMarkTask() throws NguyenException{
+    void testUnMarkTask() throws NguyenException {
         TaskList taskList = new TaskList();
         Task todo = new Todo("Meet Friends");
         taskList.add(todo);
@@ -111,7 +113,7 @@ class TaskListTest {
     }
 
     @Test
-    void testUnMarkTaskOutOfRange() throws NguyenException{
+    void testUnMarkTaskOutOfRange() throws NguyenException {
         TaskList taskList = new TaskList();
         Task todo = new Todo("Meet Friends");
         taskList.add(todo);
@@ -122,7 +124,7 @@ class TaskListTest {
     }
 
     @Test
-    void testFindTask() throws NguyenException{
+    void testFindTask() throws NguyenException {
         TaskList taskList = new TaskList();
         taskList.add(new Todo("Meet Friends"));
         taskList.add(new Deadline("Do Competitive Programming", "Dec 2 2019"));
@@ -131,7 +133,7 @@ class TaskListTest {
     }
 
     @Test
-    void testSortTasks() throws NguyenException{
+    void testSortTasks() throws NguyenException {
         TaskList taskList = new TaskList();
         Task todo = new Todo("Buy groceries");
         Task deadline = new Deadline("Finish assignment", "Dec 5 2019");
@@ -141,7 +143,7 @@ class TaskListTest {
     }
 
     @Test
-    void testSortEmptyList() throws NguyenException{
+    void testSortEmptyList() throws NguyenException {
         TaskList taskList = new TaskList();
         NguyenException exception = assertThrows(NguyenException.class, () -> {
             taskList.sort("todo");
@@ -150,7 +152,7 @@ class TaskListTest {
     }
 
     @Test
-    void testSortInvalidType() throws NguyenException{
+    void testSortInvalidType() throws NguyenException {
         TaskList taskList = new TaskList();
         taskList.add(new Todo("Buy groceries"));
         NguyenException exception = assertThrows(NguyenException.class, () -> {
@@ -160,7 +162,7 @@ class TaskListTest {
     }
 
     @Test
-    void testPrintList() throws NguyenException{
+    void testPrintList() throws NguyenException {
         TaskList taskList = new TaskList();
         taskList.add(new Todo("Meet Friends"));
         taskList.add(new Deadline("Do Competitive Programming", "Dec 2 2019"));
@@ -169,7 +171,7 @@ class TaskListTest {
     }
 
     @Test
-    void testPrintEmptyList() throws NguyenException{
+    void testPrintEmptyList() throws NguyenException {
         TaskList taskList = new TaskList();
         assertEquals(0, taskList.size());
     }

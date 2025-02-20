@@ -24,7 +24,7 @@ public class Parser {
      * @param line the task string from storage
      * @return a Task object representing the parsed task
      */
-    public static Task parseTask(String line) throws NguyenException{
+    public static Task parseTask(String line) throws NguyenException {
         assert line != null : "Task cannot be null";
         assert !line.trim().isEmpty() : "Task line cannot be empty";
         assert line.length() >= 6 : "Task line should have sufficient length for valid parsing";
@@ -42,7 +42,8 @@ public class Parser {
             String by = line.substring(line.indexOf("by:") + 4, line.length() - 1);
             task = new Deadline(description, by);
         } else if (line.startsWith("[E]")) {
-            assert line.contains("(from:") && line.contains(" to:") : "Event task should have 'from' and 'to' timestamps";
+            assert line.contains("(from:") && line.contains(" to:")
+                    : "Event task should have 'from' and 'to' timestamps";
             assert line.indexOf(" (from:") > 6 : "Event task should have a valid description";
 
             String description = line.substring(6, line.indexOf(" (from:"));
