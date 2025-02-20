@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DateParserTest {
 
@@ -26,11 +26,17 @@ class DateParserTest {
     }
 
     @Test
-    void testInvalidDates() throws NguyenException{
-        assertNull(DateParser.parseDate("2024-13-01"));
-        assertNull(DateParser.parseDate("Hello World"));
-        assertNull(DateParser.parseDate(""));
-        assertNull(DateParser.parseDate("2024.02.01"));
-        assertNull(DateParser.parseDate("2/31"));
+    void testInvalidDates() {
+        NguyenException exception1 = assertThrows(NguyenException.class, () -> DateParser.parseDate("2024-13-01"));
+        assertEquals("Invalid Date", exception1.getMessage());
+        NguyenException exception2 = assertThrows(NguyenException.class, () -> DateParser.parseDate("Hello World"));
+        assertEquals("Invalid Date", exception2.getMessage());
+        NguyenException exception3 = assertThrows(NguyenException.class, () -> DateParser.parseDate(""));
+        assertEquals("Invalid Date", exception3.getMessage());
+        NguyenException exception4 = assertThrows(NguyenException.class, () -> DateParser.parseDate("2024.02.01"));
+        assertEquals("Invalid Date", exception4.getMessage());
+        NguyenException exception5 = assertThrows(NguyenException.class, () -> DateParser.parseDate("2/31"));
+        assertEquals("Invalid Date", exception5.getMessage());
     }
+
 }
