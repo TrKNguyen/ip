@@ -42,7 +42,7 @@ public class Main extends Application {
 
         //More code to be added here later
 
-        stage.setTitle("Duke");
+        stage.setTitle("Nguyen");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

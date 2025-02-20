@@ -6,51 +6,48 @@ import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Represents a list of tasks and provides methods to manipulate the tasks.
+ * Represents a list of tasks and provides various task management functionalities.
+ * Supports adding, deleting, marking, searching, sorting, and retrieving tasks.
  */
 public class TaskList {
-    private ArrayList<Task> taskList; // ArrayList to store the tasks
+    private ArrayList<Task> taskList; // List of tasks
 
     /**
-     * Constructs an empty TaskList.
+     * Creates an empty TaskList.
      */
     public TaskList() {
-        taskList = new ArrayList<Task>();
+        taskList = new ArrayList<>();
     }
 
     /**
-     * Constructs a TaskList with an existing list of tasks.
+     * Initializes a TaskList with a given list of tasks.
      *
-     * @param taskList The list of tasks to initialize the TaskList with.
+     * @param taskList The list of tasks to initialize the TaskList.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Displays all tasks in the list with their corresponding indices.
+     * Displays all tasks in the list with their indices.
      */
     public void printList() {
         assert taskList != null : "TaskList should not be null";
         System.out.println("Here are the tasks in your list:");
         AtomicInteger countId = new AtomicInteger(1);
-        taskList.stream()
-                .forEach(task -> {
-                    int currentId = countId.getAndIncrement();
-                    System.out.println((currentId) + "." + task);
-                });
+        taskList.forEach(task -> System.out.println(countId.getAndIncrement() + ". " + task));
     }
 
     /**
      * Deletes a task from the list based on its index.
      *
-     * @param number The index of the task to delete.
+     * @param number The index of the task to delete (1-based index).
      * @throws NguyenException If the index is out of range.
      */
     public void delete(int number) throws NguyenException {
         assert taskList != null : "TaskList should not be null";
-        if (number > taskList.size() || number <= 0) {
-            throw new NguyenException("Out of range in list of task");
+        if (number <= 0 || number > taskList.size()) {
+            throw new NguyenException("Out of range in list of tasks");
         }
         System.out.println("Got it. I've removed this task:");
         System.out.println(taskList.get(number - 1));
@@ -59,15 +56,15 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as completed based on its index.
+     * Marks a task as completed.
      *
-     * @param number The index of the task to mark as done.
+     * @param number The index of the task to mark as done (1-based index).
      * @throws NguyenException If the index is out of range.
      */
     public void mark(int number) throws NguyenException {
         assert taskList != null : "TaskList should not be null";
-        if (number > taskList.size() || number <= 0) {
-            throw new NguyenException("Out of range in list of task");
+        if (number <= 0 || number > taskList.size()) {
+            throw new NguyenException("Out of range in list of tasks");
         }
         taskList.get(number - 1).mark();
         System.out.println("Nice! I've marked this task as done:");
@@ -75,15 +72,15 @@ public class TaskList {
     }
 
     /**
-     * Unmarks a task (marks it as not done) based on its index.
+     * Marks a task as not completed.
      *
-     * @param number The index of the task to unmark.
+     * @param number The index of the task to unmark (1-based index).
      * @throws NguyenException If the index is out of range.
      */
     public void unMark(int number) throws NguyenException {
         assert taskList != null : "TaskList should not be null";
-        if (number > taskList.size() || number <= 0) {
-            throw new NguyenException("Out of range in list of task");
+        if (number <= 0 || number > taskList.size()) {
+            throw new NguyenException("Out of range in list of tasks");
         }
         taskList.get(number - 1).unMark();
         System.out.println("OK, I've marked this task as not done yet:");
@@ -91,9 +88,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a new task to the list.
+     * Adds new tasks to the list.
      *
-     * @param tasks The task to add.
+     * @param tasks The tasks to add.
      */
     @SafeVarargs
     public final void add(Task... tasks) {
@@ -104,9 +101,9 @@ public class TaskList {
     }
 
     /**
-     * Retrieves a task from the list based on its index.
+     * Retrieves a task based on its index.
      *
-     * @param number The index of the task to retrieve.
+     * @param number The index of the task to retrieve (0-based index).
      * @return The task at the specified index.
      */
     public Task get(int number) {
@@ -115,7 +112,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the number of tasks in the list.
+     * Returns the total number of tasks in the list.
      *
      * @return The size of the task list.
      */
@@ -123,119 +120,133 @@ public class TaskList {
         assert taskList != null : "TaskList should not be null";
         return taskList.size();
     }
+
     /**
-     * Returns the list of matched task
+     * Searches for tasks containing a specific keyword.
      *
-     * @param keyword The keyword need to search
+     * @param keyword The keyword to search for.
      */
     public void find(String keyword) {
         assert taskList != null : "TaskList should not be null";
         System.out.println("Here are the matching tasks in your list:");
         int countId = 0;
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
+        for (Task task : taskList) {
             if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
-                countId++;
-                System.out.println(countId + ". " + task);
+                System.out.println(++countId + ". " + task);
             }
         }
     }
+
     /**
-     * Sort task some specific task
+     * Sorts tasks by type.
      *
-     * @param taskType The task
+     * @param taskType The type of task to sort (todo, deadline, event).
+     * @throws NguyenException If the task type is invalid.
      */
     public void sort(String taskType) throws NguyenException {
         assert taskList != null : "TaskList should not be null";
         taskType = taskType.trim();
-        if (!taskType.isEmpty()) {
-            taskType.concat(" ");
-        }
-        System.out.println("Here are the sorted " + taskType + "tasks in your list:");
-        if (taskType.startsWith("todo")) {
-            AtomicInteger countId = new AtomicInteger(1);
-            taskList.stream()
-                    .filter(task -> (task.getType() == "todo"))
-                    .forEach(task -> {
-                        int currentId = countId.getAndIncrement();
-                        System.out.println(currentId + "." + task);
-                    });
-        } else if (taskType.startsWith("deadline")) {
-            AtomicInteger countId = new AtomicInteger(1);
-            taskList.stream()
-                    .filter(task -> (task.getType() == "deadline"))
-                    .sorted(Comparator.comparing(Task::getDate))
-                    .forEach(task -> {
-                        int currentId = countId.getAndIncrement();
-                        System.out.println(currentId + "." + task);
-                    });
-        } else if (taskType.startsWith("event")) {
-            AtomicInteger countId = new AtomicInteger(1);
-            taskList.stream()
-                    .filter(task -> (task.getType() == "event"))
-                    .sorted(Comparator.comparing(Task::getDate))
-                    .forEach(task -> {
-                        int currentId = countId.getAndIncrement();
-                        System.out.println(currentId + "." + task);
-                    });
-        } else {
-            throw new NguyenException("Invalid sort method");
+        System.out.println("Here are the sorted " + taskType + " tasks in your list:");
+        switch (taskType.toLowerCase()) {
+            case "todo":
+                sortTodoTask();
+                break;
+            case "deadline":
+                sortDeadlineTask();
+                break;
+            case "event":
+                sortEventTask();
+                break;
+            default:
+                throw new NguyenException("Invalid sort method");
         }
     }
+
+    private void sortEventTask() {
+        printSortedTasks("event");
+    }
+
+    private void sortDeadlineTask() {
+        printSortedTasks("deadline");
+    }
+
+    private void sortTodoTask() {
+        printSortedTasks("todo");
+    }
+
     /**
-     * Handle every tasks
+     * Prints sorted tasks of a specific type.
      *
-     * @param item The task information
+     * @param taskType The type of task to print.
+     */
+    private void printSortedTasks(String taskType) {
+        AtomicInteger countId = new AtomicInteger(1);
+        taskList.stream()
+                .filter(task -> task.getType().equals(taskType))
+                .sorted(Comparator.comparing(Task::getDate))
+                .forEach(task -> System.out.println(countId.getAndIncrement() + ". " + task));
+    }
+
+    /**
+     * Handles adding a Todo task.
+     *
+     * @param item The user input containing task details.
+     * @throws NguyenException If the task description is empty.
+     */
+    public void handleTodoTask(String item) throws NguyenException {
+        if (item.length() == 4) {
+            throw new NguyenException("Empty task is invalid");
+        }
+        taskList.add(new Todo(item.substring(4).trim()));
+    }
+
+    /**
+     * Handles adding a Deadline task.
+     *
+     * @param item The user input containing task details.
+     * @throws NguyenException If the deadline format is incorrect.
+     */
+    public void handleDeadlineTask(String item) throws NguyenException {
+        int indexBy = item.indexOf("/by");
+        if (indexBy == -1) {
+            throw new NguyenException("Missing deadline time");
+        }
+        taskList.add(new Deadline(item.substring(8, indexBy).trim(), item.substring(indexBy + 4).trim()));
+    }
+
+    /**
+     * Handles adding an Event task.
+     *
+     * @param item The user input containing task details.
+     * @throws NguyenException If the event format is incorrect.
+     */
+    public void handleEventTask(String item) throws NguyenException {
+        int indexFrom = item.indexOf("/from");
+        int indexTo = item.indexOf("/to");
+        if (indexFrom == -1 || indexTo == -1 || indexFrom > indexTo) {
+            throw new NguyenException("Invalid event format");
+        }
+        taskList.add(new Event(
+                item.substring(5, indexFrom).trim(),
+                item.substring(indexFrom + 6, indexTo).trim(),
+                item.substring(indexTo + 4).trim()));
+    }
+
+    /**
+     * Handles adding different types of tasks based on user input.
+     *
+     * @param item The task details provided by the user.
+     * @throws NguyenException If the task format is invalid.
      */
     public void handleTask(String item) throws NguyenException {
-        TaskType type;
         if (item.startsWith("todo")) {
-            type = TaskType.TODO;
+            handleTodoTask(item);
         } else if (item.startsWith("deadline")) {
-            type = TaskType.DEADLINE;
+            handleDeadlineTask(item);
         } else if (item.startsWith("event")) {
-            type = TaskType.EVENT;
+            handleEventTask(item);
         } else {
-            throw new NguyenException("Invalid operation");
-        }
-
-        // Handles different types of tasks
-        if (type == TaskType.TODO) {
-            if (item.length() == 4) {
-                throw new NguyenException("Empty task is invalid task");
-            }
-            String task = item.substring(4);
-            taskList.add(new Todo(task));
-        } else if (type == TaskType.DEADLINE) {
-            int indexBy = item.indexOf("/by");
-            if (item.length() == 8) {
-                throw new NguyenException("Empty task is invalid task");
-            }
-            if (indexBy == -1) {
-                throw new NguyenException("Dont have deadline");
-            }
-            String task = item.substring(8, indexBy);
-            String by = item.substring(indexBy + 4);
-            taskList.add(new Deadline(task, by));
-        } else if (type == TaskType.EVENT) {
-            int indexFrom = item.indexOf("/from");
-            int indexTo = item.indexOf("/to");
-            if (item.length() == 5) {
-                throw new NguyenException("Empty task is invalid task");
-            }
-            if (indexFrom == -1) {
-                throw new NguyenException("Dont have starting time");
-            }
-            if (indexTo == -1) {
-                throw new NguyenException("Dont have ending time");
-            }
-            if (indexFrom > indexTo) {
-                throw new NguyenException("Wrong syntax order: /from should stand before /to");
-            }
-            String task = item.substring(5, indexFrom);
-            String from = item.substring(indexFrom + 6, indexTo);
-            String to = item.substring(indexTo + 4);
-            taskList.add(new Event(task, from, to));
+            throw new NguyenException("Invalid task type");
         }
         System.out.println("Got it. I've added this task:");
         System.out.println(taskList.get(taskList.size() - 1));

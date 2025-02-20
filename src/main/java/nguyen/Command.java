@@ -32,6 +32,7 @@ public class Command {
             isExit = true;
             return;
         }
+
         // Displays all tasks in the list
         if (item.equals("list")) {
             taskList.printList();

@@ -2,24 +2,37 @@ package nguyen;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+/**
+ * Enum representing different task types: TODO, DEADLINE, and EVENT.
+ */
 enum TaskType {
     TODO, DEADLINE, EVENT
 }
+
 /**
- * The main class for the chatbot "Nguyen".
- * This chatbot allows users to manage tasks, including adding, deleting, marking, and listing them.
+ * Main class for the chatbot "Nguyen".
+ * Manages user interaction, task management, and data storage.
  */
 public class Nguyen {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
+
+    /**
+     * Default constructor that initializes the chatbot with default configurations.
+     */
     public Nguyen() {
         ui = new Ui();
         tasks = new TaskList();
         storage = new Storage("data/ChatBot.txt");
     }
+
     /**
-     * Represents different types of tasks a user can create.
+     * Constructor that initializes the chatbot with a specified storage file path.
+     * Attempts to load tasks from the file.
+     *
+     * @param filePath Path to the storage file.
      */
     public Nguyen(String filePath) {
         ui = new Ui();
@@ -31,9 +44,10 @@ public class Nguyen {
             tasks = new TaskList();
         }
     }
+
     /**
-     * Runs the chatbot, continually accepting user input and executing corresponding commands.
-     * Ends the program when the bye command is given.
+     * Runs the chatbot, accepting user input and executing corresponding commands.
+     * Ends the program when the 'bye' command is given.
      */
     public void run() {
         ui.showWelcome();
@@ -55,6 +69,14 @@ public class Nguyen {
             }
         }
     }
+
+    /**
+     * Returns the chatbot's response to the user's input as a string.
+     * Used for programmatic interaction with the chatbot.
+     *
+     * @param userInput The user's command input.
+     * @return The chatbot's response.
+     */
     public String getResponse(String userInput) {
         PrintStream originalOut = System.out;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -74,8 +96,9 @@ public class Nguyen {
         }
         return baos.toString();
     }
+
     /**
-     * The main method that runs the chatbot.
+     * Main method that initializes and runs the chatbot.
      *
      * @param args Command-line arguments.
      */
