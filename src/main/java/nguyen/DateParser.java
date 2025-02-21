@@ -51,6 +51,6 @@ public class DateParser {
                 // just continue to handle next possible time format of input
             }
         }
-        throw new NguyenException("Invalid Date");
+        throw new NguyenException("Invalid Date, expected format: dd/MM/yyyy HHmm");
     }
 }

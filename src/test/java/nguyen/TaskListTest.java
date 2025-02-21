@@ -171,7 +171,7 @@ class TaskListTest {
     }
 
     @Test
-    void testPrintEmptyList() throws NguyenException {
+    void testPrintEmptyList() {
         TaskList taskList = new TaskList();
         assertEquals(0, taskList.size());
     }
