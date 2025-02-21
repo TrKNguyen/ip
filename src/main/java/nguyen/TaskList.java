@@ -216,7 +216,8 @@ public class TaskList {
     public void handleDeadlineTask(String item) throws NguyenException {
         int indexBy = item.indexOf("/by");
         if (indexBy == -1) {
-            throw new NguyenException("Missing deadline time");
+            throw new NguyenException("Invalid deadline format, " +
+                    "expected format: deadline <task> /by <valid date>");
         }
         taskList.add(new Deadline(item.substring(8, indexBy).trim(), item.substring(indexBy + 4).trim()));
     }
