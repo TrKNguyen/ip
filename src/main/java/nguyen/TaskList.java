@@ -231,7 +231,8 @@ public class TaskList {
         int indexFrom = item.indexOf("/from");
         int indexTo = item.indexOf("/to");
         if (indexFrom == -1 || indexTo == -1 || indexFrom > indexTo) {
-            throw new NguyenException("Invalid event format");
+            throw new NguyenException("Invalid event format, " +
+                    "expected format: event <task> /from <valid date> /to <valid date>");
         }
         taskList.add(new Event(
                 item.substring(5, indexFrom).trim(),
@@ -255,7 +256,7 @@ public class TaskList {
         } else {
             throw new NguyenException("Nah, that is not a real task type");
         }
-        System.out.println("Cool, I added this to your list:");
+        System.out.println("So cool, I added this to your list:");
         System.out.println(taskList.get(taskList.size() - 1));
         System.out.println("Now you are got " + taskList.size() + " things to do");
     }
